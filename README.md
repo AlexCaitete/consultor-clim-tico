@@ -1,36 +1,27 @@
-# 🌦️ Consultor Climático Inteligente (Python + SQL)
+# 🌦️ Consultor Climático + Histórico SQL
 
-Um sistema de consulta meteorológica desenvolvido em **Python** que integra consumo de APIs RESTful com persistência de dados em Banco Relacional (SQLite).
+Uma ferramenta de engenharia de dados que consome a API da OpenWeatherMap, processa as informações climáticas e **persiste os dados** em um banco de dados relacional local.
 
-O projeto não apenas exibe dados brutos, mas aplica uma **lógica de negócios** para fornecer recomendações personalizadas ao usuário baseadas nas condições climáticas atuais, além de manter um histórico de todas as consultas realizadas.
+Este projeto simula um pipeline de dados simples: **Extração** (API), **Transformação** (Lógica de conselhos) e **Carregamento** (SQLite).
 
 ## 🚀 Funcionalidades
 
-- **Consumo de API:** Conexão com a `OpenWeatherMap` para extração de dados em tempo real (JSON).
-- **Tratamento de Dados:** Parsing de JSON para extrair temperatura, sensação térmica e descrições.
-- **Lógica Condicional:** Sistema de "Conselheiro" que sugere ações (levar guarda-chuva, beber água, etc.) com base em parâmetros climáticos.
-- **Persistência de Dados (SQL):** Integração com **SQLite** para salvar automaticamente cada consulta (Cidade, Temperatura, Data/Hora) em um banco de dados local.
-- **Tratamento de Erros:** Gestão de erros HTTP (404 - Cidade não encontrada).
+- **Monitoramento em Tempo Real:** Consulta temperatura, sensação térmica e condições do clima.
+- **Persistência de Dados (SQL):** Cada consulta é salva automaticamente em um arquivo `historico_clima.db`.
+- **Inteligência Condicional:** O sistema analisa os dados e oferece recomendações (ex: "Leve guarda-chuva", "Beba água").
+- **Tratamento de Erros:** Gestão robusta de respostas HTTP (404, 401).
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Stack Tecnológica
 
-- **Python 3.12+**
-- **Requests** (Requisições HTTP/REST)
-- **SQLite3** (Banco de Dados Relacional)
-- **Datetime** (Manipulação Temporal)
-- **JSON** (Intercâmbio de dados)
+- **Python 3.12**
+- **SQLite3** (Banco de Dados embutido)
+- **Requests** (Consumo de API REST)
+- **Datetime** (Log temporal)
 
-## 📦 Como rodar o projeto
+## 📦 Como usar
 
-### Pré-requisitos
-Você precisa ter o Python instalado.
-
+### 1. Instalação
 ```bash
-# 1. Clone o repositório
 git clone [https://github.com/SEU-USUARIO/consultor-climatico.git](https://github.com/SEU-USUARIO/consultor-climatico.git)
-
-# 2. Entre na pasta
 cd consultor-climatico
-
-# 3. Instale a biblioteca de requisições
 pip install requests
