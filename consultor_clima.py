@@ -4,7 +4,7 @@ import sqlite3
 from datetime import datetime
 
 # ✅ CORREÇÃO: Já coloquei sua chave REAL aqui. Não apague!
-API_KEY = "d77dc443814bf728e47a4522df4336f3"
+API_KEY = [COLOQUE SUA CHAVE AQUI]
 IDIOMA = "pt_br"
 
 
@@ -89,4 +89,5 @@ def consultar_clima():
 
 
 if __name__ == "__main__":
+
     consultar_clima()
