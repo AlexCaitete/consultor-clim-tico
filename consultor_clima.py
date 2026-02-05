@@ -3,7 +3,7 @@ import os
 import sqlite3
 from datetime import datetime
 
-# ✅ CORREÇÃO: Já coloquei sua chave REAL aqui. Não apague!
+
 API_KEY = [COLOQUE SUA CHAVE AQUI]
 IDIOMA = "pt_br"
 
@@ -22,7 +22,7 @@ def criar_banco():
                        id INTEGER PRIMARY KEY AUTOINCREMENT, cidade TEXT, temperatura REAL, condicao TEXT, data_hora TEXT)''')
     conexao.commit()
     conexao.close()
-    # (Removi o print daqui para não confundir)
+    
 
 
 def salvar_no_banco(cidade, temp, condicao):
@@ -38,7 +38,7 @@ def salvar_no_banco(cidade, temp, condicao):
 
     conexao.commit()
     conexao.close()
-    # ✅ O print agora aparece só no final, quando realmente salvar!
+   
     print("💾 Dados salvos no histórico com sucesso!")
 
 
@@ -91,3 +91,4 @@ def consultar_clima():
 if __name__ == "__main__":
 
     consultar_clima()
+
