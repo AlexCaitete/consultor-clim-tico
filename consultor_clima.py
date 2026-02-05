@@ -3,28 +3,34 @@ import os
 import sqlite3
 from datetime import datetime
 
-
-API_KEY = [COLOQUE SUA CHAVE AQUI]
+#CRIAÇÃO DA CHAVE DE ACESSO QUE VOCÊ PRECISA GERAR NO SITE https://openweathermap.org/ E ESCOLHA DO IDIOMA
+API_KEY = "COLOQUE SUA CHAVE AQUI"
 IDIOMA = "pt_br"
 
-
+#FUNÇÃO PRA LIMPAR A TELA
 def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-
+#FUNÇÃO PRA CRIAR O BANCO DE DADOS AS FUNÇÕES E COMANDO QUE ESTÃO DENTRO DESSA FUNÇÃO, SÃO FUNÇÕES JÁ DETERMINADAS PELO DICIONÁRIO SQLITE3
 def criar_banco():
     conexao = sqlite3.connect('historico_clima.db')
     cursor = conexao.cursor()
 
+# AQUI ESTAMOS DANDO OS COMANDO PARA MONTAR A PLANILHA EXATAMENTE COMO QUEREMOS COM AS COLUNAS EXATAS E SÓ COM OS DADOS DESEJADO
+    # id: nome da coluna(identificador), INTEGER: só aceita números.
+    # PRIMARY: é o CPF da linha. significa que esse número nunca pode se repetir
+    #AUTOINCREMETE:Você não precisa dizer o número. O banco conta sozinho: 1, 2, 3... Se você apagar o 2, o próximo continua sendo o 4.
+    #cidade TEXT - Cria uma coluna chamada "cidade" que só aceita Texto.
+    #temperatura REAL - Cria uma coluna "temperatura" E O REAL: Significa "Número Real" (com vírgula/ponto). Se fosse INTEGER, ele arredondaria 29.5 para 29. Aqui ele aceita o decimal.
+    #condicao TEXT e data_hora TEXT - Colunas de texto simples para guardar a descrição ("Céu limpo") e a data.
     cursor.execute('''
-                   CREATE TABLE IF NOT EXISTS consultas
-                   (
-                       id INTEGER PRIMARY KEY AUTOINCREMENT, cidade TEXT, temperatura REAL, condicao TEXT, data_hora TEXT)''')
+                   CREATE TABLE IF NOT EXISTS consultas #CRIE UMA TABELA CHAMA CONSULTA
+                   (id INTEGER PRIMARY KEY AUTOINCREMENT, cidade TEXT, temperatura REAL, condicao TEXT, data_hora TEXT)''')
     conexao.commit()
     conexao.close()
-    
 
 
+#função para salvar no BD
 def salvar_no_banco(cidade, temp, condicao):
     conexao = sqlite3.connect('historico_clima.db')
     cursor = conexao.cursor()
@@ -38,10 +44,10 @@ def salvar_no_banco(cidade, temp, condicao):
 
     conexao.commit()
     conexao.close()
-   
+    # ✅ O print agora aparece só no final, quando realmente salvar!
     print("💾 Dados salvos no histórico com sucesso!")
 
-
+#função para consultar o BD
 def consultar_clima():
     limpar_tela()
     criar_banco()  # Garante o banco, mas fica em silêncio
@@ -87,8 +93,6 @@ def consultar_clima():
     else:
         print(f"❌ Erro: {resposta.status_code}")
 
-
+#executar o programa
 if __name__ == "__main__":
-
     consultar_clima()
-
