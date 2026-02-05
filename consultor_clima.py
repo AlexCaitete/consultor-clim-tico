@@ -1,19 +1,16 @@
-#importa as bibliotecas que serão necessárias
-
 import requests
 import os
 import sqlite3
 from datetime import datetime
 
-#para rodar é necessário entrar nesse link:https://openweathermap.org/ fazer o acdastro e gerar sua chave de acesso
-API_KEY = "SUA_CHAVE_AQUI"
+# ✅ CORREÇÃO: Já coloquei sua chave REAL aqui. Não apague!
+API_KEY = "d77dc443814bf728e47a4522df4336f3"
 IDIOMA = "pt_br"
 
 
 def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-#a função para criar o banco de dados que são salvas as informações
 
 def criar_banco():
     conexao = sqlite3.connect('historico_clima.db')
@@ -22,26 +19,12 @@ def criar_banco():
     cursor.execute('''
                    CREATE TABLE IF NOT EXISTS consultas
                    (
-                       id
-                       INTEGER
-                       PRIMARY
-                       KEY
-                       AUTOINCREMENT,
-                       cidade
-                       TEXT,
-                       temperatura
-                       REAL,
-                       condicao
-                       TEXT,
-                       data_hora
-                       TEXT
-                   )
-                   ''')
+                       id INTEGER PRIMARY KEY AUTOINCREMENT, cidade TEXT, temperatura REAL, condicao TEXT, data_hora TEXT)''')
     conexao.commit()
     conexao.close()
-    
+    # (Removi o print daqui para não confundir)
 
-#depois de coletar os dados essa função os salvas 
+
 def salvar_no_banco(cidade, temp, condicao):
     conexao = sqlite3.connect('historico_clima.db')
     cursor = conexao.cursor()
@@ -55,14 +38,13 @@ def salvar_no_banco(cidade, temp, condicao):
 
     conexao.commit()
     conexao.close()
-    
+    # ✅ O print agora aparece só no final, quando realmente salvar!
     print("💾 Dados salvos no histórico com sucesso!")
 
-#função principal para a consulta, a função que vai ter interação com o usuário.
 
 def consultar_clima():
     limpar_tela()
-    criar_banco()  
+    criar_banco()  # Garante o banco, mas fica em silêncio
 
     CIDADE = input('Insira o nome da cidade que deseja saber o clima: ').upper().strip()
 
@@ -108,5 +90,3 @@ def consultar_clima():
 
 if __name__ == "__main__":
     consultar_clima()
-
-
