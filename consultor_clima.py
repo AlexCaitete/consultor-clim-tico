@@ -44,7 +44,7 @@ def salvar_no_banco(cidade, temp, condicao):
 
     conexao.commit()
     conexao.close()
-    # ✅ O print agora aparece só no final, quando realmente salvar!
+    
     print("💾 Dados salvos no histórico com sucesso!")
 
 #função para consultar o BD
@@ -95,4 +95,5 @@ def consultar_clima():
 
 #executar o programa
 if __name__ == "__main__":
+
     consultar_clima()
